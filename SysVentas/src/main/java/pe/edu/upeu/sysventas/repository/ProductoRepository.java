@@ -22,7 +22,6 @@ public class ProductoRepository extends AbstractJpaRepository<Producto, Long>{
     protected Long generateId() {
         return sequence++;
     }
-
     public void seedData() {
         if (findAll().isEmpty()) {
 
@@ -35,8 +34,8 @@ public class ProductoRepository extends AbstractJpaRepository<Producto, Long>{
             UnidMedida u=new UnidMedida();
             u.setIdUnidad(1L);
 
-            save(new Producto(generateId(), "Telivisor", TipoProducto.PRODUCTO,
-                    1200.00, 0.00, 100.00,12.0,0.0, c,m,u ));
+            save(new Producto(generateId(),"televisor", TipoProducto.PRODUCTO, 1200.00, 0.00, 100.00 ,12.0, 0.0, c,m,u ));
+
         }
     }
 
