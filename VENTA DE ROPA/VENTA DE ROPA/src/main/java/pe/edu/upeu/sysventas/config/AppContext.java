@@ -28,33 +28,18 @@ public class AppContext {
         registrarControladores();
     }
 
-    // CAPA 1 – REPOSITORIOS
+    // CAPA 1 - REPOSITORIOS
     private void registrarRepositorios() {
-        registrar(CategoriaRepository.class, new CategoriaRepository());
-        registrar(MarcaRepository.class, new MarcaRepository());
-        registrar(UnidadMedidaRepository.class, new UnidadMedidaRepository());
-        registrar(ProductoRepository.class, new ProductoRepository());
         registrar(ClienteRepository.class, new ClienteRepository());
     }
 
-    // CAPA 2 – SERVICIOS
+    // CAPA 2 - SERVICIOS
     private void registrarServicios() {
-        registrar(ICategoriaService.class, new CategoriaServiceImp(getBean(CategoriaRepository.class)));
-        registrar(IMarcaService.class, new MarcaServiceImp(getBean(MarcaRepository.class)));
-        registrar(IProductoService.class, new ProductoServiceImp(getBean(ProductoRepository.class)));
-        registrar(IUnidadMedidaService.class, new UnidadMedidaServiceImp(getBean(UnidadMedidaRepository.class)));
         registrar(IClienteService.class, new ClienteServiceImpl(getBean(ClienteRepository.class)));
     }
 
-    // CAPA 3 – CONTROLADORES JavaFX
+    // CAPA 3 - CONTROLADORES JavaFX
     private void registrarControladores() {
-        registrar(ProductoController.class,
-                new ProductoController(
-                        getBean(IMarcaService.class),
-                        getBean(ICategoriaService.class),
-                        getBean(IProductoService.class),
-                        getBean(IUnidadMedidaService.class)));
-
         registrar(ClienteController.class, new ClienteController(getBean(IClienteService.class)));
     }
 
@@ -72,7 +57,8 @@ public class AppContext {
                     .findFirst()
                     .orElseThrow(() -> new RuntimeException(
                             "Bean no encontrado: " + tipo.getName() +
-                                    "\n-> ¿Lo registraste en AppContext?"));
+                                    "\n-> ¿Lo registraste en AppContext?"
+                    ));
         }
         return (T) bean;
     }
